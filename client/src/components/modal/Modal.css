@@ -1,0 +1,88 @@
+.modal{
+  position: fixed;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #0000009d;
+  animation: showModal ease 0.2s;
+}
+@keyframes showModal{
+  from{
+    opacity: 0;
+  }to{
+    opacity: 1;
+  }
+}
+
+.modal__wrapper{
+  position: fixed;
+}
+
+.modal__block{
+  min-width: 300px;
+  min-height: 200px;
+  max-width: 500px;
+  max-height: 400px;
+  padding: 40px 20px 20px;
+  background-color: #121212;
+  border-radius: 10px;
+  text-align: center;
+  margin: 0 20px;
+}
+
+.modal__title{
+  margin-top: 30px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.modal__description{
+  line-height: 30px;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.check-mark__circle{
+  position: relative;
+  margin: auto;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid #37ff3793;
+}
+
+.check-mark__symbol{
+  position: absolute;
+  top: 25%;
+  left: 30%;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+
+.check-mark__symbol::before {
+  position: absolute;
+  left: 0;
+  top: 49%;
+  height: 50%;
+  width: 4px;
+  background-color: #37ff37;
+  content: "";
+  transform: translateX(10px) rotate(-45deg);
+  transform-origin: left bottom;
+}
+
+.check-mark__symbol::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 100%;
+  background-color: #37ff37;
+  content: "";
+  transform: translateX(10px) rotate(-45deg);
+  transform-origin: left bottom;
+}

@@ -1,0 +1,24 @@
+.preloader-page{
+  height: 100vh;
+}
+
+.preloader{
+  width: 76px;
+  height: 76px;
+  border: 8px solid rgba(0, 82, 236, 0.25);
+  border-top-color: #0052ec;
+  border-radius: 50%;
+  position: relative;
+  animation: loader-rotate 1s linear infinite;
+  top: 50%;
+  margin: -28px auto 0 auto; 
+}
+
+@keyframes loader-rotate{
+  0% {
+    transform: rotate(0); 
+  }
+  100% {
+    transform: rotate(360deg); 
+  } 
+}

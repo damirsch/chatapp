@@ -1,0 +1,12 @@
+{
+  "name": "chataplication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd ./client && npm start",
+    "serve": "cd ./server && npm start"
+  },
+  "author": "Damir",
+  "license": "ISC"
+}

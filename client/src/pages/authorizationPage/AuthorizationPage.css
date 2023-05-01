@@ -1,0 +1,50 @@
+.authorization-page{
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.authorization-info{
+  width: 1600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: url('./bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: inset 0 0 100px #000000;
+  padding: 0 66px;
+}
+
+.authorization-info__logo{
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.authorization-info__description{
+  width: 100%;
+  max-width: 598px;
+  font-size: 32px;
+  margin-top: 150px;
+  margin-bottom: 100px;
+}
+
+.authorization-info__initials{
+  margin-top: 50px;
+}
+
+@media all and (max-width: 1024px){
+  .authorization-info{
+    padding: 0 20px;
+  }
+  .authorization-info__logo{
+    margin-top: 70px;
+  }
+}
+
+@media all and (max-width: 950px){
+  .authorization-info{
+    display: none;
+  }
+}
