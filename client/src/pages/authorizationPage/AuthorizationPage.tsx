@@ -1,30 +1,33 @@
-import React, { type FC, useContext, useState } from 'react'
+import React, { type FC, useContext, useState, useEffect } from 'react'
 import { AuthorizationForm } from '../../modules'
 import './AuthorizationPage.css'
 import { Context } from '../..'
 import Modal from '../../components/modal/Modal'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import Preloader from '../../ui/preloader/Preloader'
+import { IAuthorizationPage } from '../../types'
 
-interface IAuthorizationPage {
-  isForRegistration: boolean
-}
-
-interface ILocation extends Location{
-  state: {
-    isAuthPageWasVerified?: boolean
-  }
-}
 
 const AuthorizationPage: FC<IAuthorizationPage> = ({ isForRegistration }) => {
   const { store } = useContext(Context)
   const [isAuth, setIsAuth] = useState<boolean>(false)
+  const [loaded, setLoaded] = useState(false)
   const navigate = useNavigate()
 
-  console.log(useLocation())
-  if (store.isAuth || isAuth) {
-    navigate('/', {state: {isAuthPageWasVerified: true}})
-  }
+  useEffect(() => {
+    setLoaded(true)
+    if (store.isAuth && !isAuth) {
+      navigate('/', {state: {isAuthPageWasVerified: true}})
+    }else if(isAuth){
+      setTimeout(() => {
+        navigate('/')
+      }, 2000)
+    }
+  }, [isAuth])
 
+  if(!loaded){
+    return <Preloader/>
+  }
   return (
     <div className='default__wrapper'>
       {store.isAuth || isAuth

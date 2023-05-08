@@ -1,17 +1,9 @@
-import React, { FC, useContext, useEffect, useState } from 'react'
+import React, { FC, useContext, useEffect, useState, useRef } from 'react'
 import { Context } from '../../..'
 import './AuthorizationForm.css'
-
-interface IAuthorizationForm{
-  isForRegistration: boolean
-  setIsAuth: Function
-}
-
-interface IForms{
-  username: string,
-  email: string,
-  password: string,
-}
+import { IAuthorizationForm, IForms } from '../../../types'
+import Modal from '../../../components/modal/Modal'
+import Spinner from '../ui/spiner/Spinner'
 
 const AuthorizationForm: FC<IAuthorizationForm> = ({isForRegistration, setIsAuth}) => {
   const {store} = useContext(Context)
@@ -27,10 +19,24 @@ const AuthorizationForm: FC<IAuthorizationForm> = ({isForRegistration, setIsAuth
   const [isButtonClick, setIsButtonClick] = useState<boolean>(false)
   const [serverError, setServerError] = useState<string>('')
 
+  const button = useRef<HTMLButtonElement>()
+
   useEffect(() => {
     const [errUsername, errEmail, errPassword] = validateAll(username, email, password)
     setErrors({username: errUsername, email: errEmail, password: errPassword})
   }, [username, email, password])
+
+  useEffect(() => {
+    function onEnterClick(e: KeyboardEvent){
+      if(e.key === 'Enter'){
+        button.current.click()
+      }
+    }
+    document.addEventListener('keypress', onEnterClick);
+    return () => {
+      document.removeEventListener('keypress', onEnterClick);
+    }
+  }, [])
   
   const registration = async () => {
     const [errUsername, errEmail, errPassword] = validateAll(username, email, password)
@@ -51,6 +57,11 @@ const AuthorizationForm: FC<IAuthorizationForm> = ({isForRegistration, setIsAuth
   }
 
   const login = async () => {
+    const [errUsername, _, errPassword] = validateAll(username, email, password)
+    setIsButtonClick(true)
+    if(errUsername || errPassword){
+      return setLoading(false)
+    }
     try{
       setLoading(true)
       await store.login(username, password)
@@ -88,7 +99,7 @@ const AuthorizationForm: FC<IAuthorizationForm> = ({isForRegistration, setIsAuth
 
   const validateAll = (username: string, email: string, password: string) => {
     return [validationUsername(username), validationEmail(email), validationPassword(password)]
-  }  
+  }
   
   return(
     <div className='authorization-form'>
@@ -114,7 +125,7 @@ const AuthorizationForm: FC<IAuthorizationForm> = ({isForRegistration, setIsAuth
             />
             <span></span>
             <div className='error-validation'>
-              {username || isButtonClick ? (isForRegistration ? errors.username : '') : null}
+              {username || isButtonClick ? errors.username : null}
             </div>
           </label>
           {isForRegistration 
@@ -145,17 +156,17 @@ const AuthorizationForm: FC<IAuthorizationForm> = ({isForRegistration, setIsAuth
             />
             <span></span>
             <div className='error-validation'>
-              {password || isButtonClick ? (isForRegistration ? errors.username : '') : null}
+              {password || isButtonClick ? errors.password : null}
             </div>
           </label>
           {isForRegistration 
             ? 
-            <button onClick={() => registration()} className='authorization-form__button'>
-              Registration
+            <button onClick={() => registration()} ref={button} className='authorization-form__button'>
+              {loading ? <Spinner/> : 'Registration'}
             </button>
             :
-            <button onClick={() => login()} className='authorization-form__button'>
-              Sign in
+            <button onClick={() => login()} ref={button} className='authorization-form__button'>
+              {loading ? <Spinner/> : 'Sign in'}
             </button>
           }
           {isForRegistration 
@@ -170,6 +181,7 @@ const AuthorizationForm: FC<IAuthorizationForm> = ({isForRegistration, setIsAuth
           }
         </div>
       </div>
+      {serverError ? <Modal title={serverError} description='as'/> : ''}
     </div>
   )
 }

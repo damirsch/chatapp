@@ -1,0 +1,22 @@
+.modal-auth-error{
+  position: absolute;
+  top: -90px;
+  left: 0;
+  background-color: #7a0000;
+  padding: 10px;
+  border-radius: 10px;
+  animation: modal-auth-error ease 0.2s;
+  box-shadow: inset 0px 0px 40px black;
+  user-select: none;
+}
+
+@keyframes modal-auth-error{
+  from{
+    top: -150px;
+    opacity: 0;
+  }
+  to{
+    top: -90px;
+    opacity: 1;
+  }
+}

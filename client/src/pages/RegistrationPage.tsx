@@ -1,3 +1,4 @@
+import React from 'react'
 import AuthorizationPage from "./authorizationPage/AuthorizationPage";
 
 const RegistrationPage = () => {

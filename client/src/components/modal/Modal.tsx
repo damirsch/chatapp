@@ -1,10 +1,6 @@
 import React, { type FC } from 'react'
 import './Modal.css'
-
-interface IModal {
-  title: string
-  description: string
-}
+import { IModal } from '../../types'
 
 const Modal: FC<IModal> = ({ title, description }) => {
   return (

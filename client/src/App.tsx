@@ -19,15 +19,10 @@ function App() {
   useEffect(() => {
     (async () => {
       if(localStorage.getItem('token')){
-        try {
-          await store.checkAuth()
-        }catch(e: any){
-          console.log(e.message);
-        }finally{
-          setLoading(false)
-        }
+        await store.checkAuth()
       }
     })()
+      .finally(() => setLoading(false))
   }, [])
 
   if(!loading){

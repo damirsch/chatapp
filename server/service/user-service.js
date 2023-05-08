@@ -13,10 +13,15 @@ async function generateTokenAndSaveUser(user){
 
 class UserService{
   async registration(username, email, password){
-    const candidate = await userModel.findOne({email})
-    if(candidate){
-      throw ApiError.BadRequest(`Пользователь с почтовым адресом: ${email} уже существует`)
+    const candidateUsername = await userModel.findOne({username})
+    const candidateEmail = await userModel.findOne({email})
+    if(candidateUsername){
+      throw ApiError.BadRequest(`Пользователь с таким именем уже существует`)
     }
+    if(candidateEmail){
+      throw ApiError.BadRequest(`Пользователь с таким почтовым адресом уже существует`)
+    }
+
     const hashPassword = await bcrypt.hash(password, 3)
     
     const user = await userModel.create({username, email, password: hashPassword})

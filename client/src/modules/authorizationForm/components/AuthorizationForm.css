@@ -1,6 +1,7 @@
 .authorization-form{
   width: 69.75%;
   padding: 0 60px;
+  position: relative;
 }
 
 .authorization-form__wrapper{
@@ -45,6 +46,7 @@
 }
 
 .authorization-form__wrapper .authorization-form__block{
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 440px;
@@ -63,6 +65,7 @@
 }
 
 .authorization-form__wrapper .authorization-form__button{
+  position: relative;
   height: 65px;
   border-radius: 20px;
   margin: 69px 0 0;
