@@ -1,4 +1,5 @@
 const Router = require('express').Router
+const roomController = require('../controllers/room-controller')
 const userController = require('../controllers/user-controller')
 const {body} = require('express-validator')
 
@@ -14,5 +15,8 @@ router.post('/login', userController.login)
 router.post('/logout', userController.logout)
 router.get('/users', userController.getUsers)
 router.get('/refresh', userController.refresh)
+router.get('/rooms', roomController.getRooms)
+router.post('/messages', roomController.getMessages)
+router.post('/amountOfSentMessages', userController.getAmountOfSentMessages)
 
 module.exports = router

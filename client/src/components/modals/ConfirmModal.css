@@ -1,0 +1,40 @@
+.modal-room__button.-confirm{
+  background-color: #ff0000;
+  width: 40%;
+  border: 1px solid #af0000;
+}
+.modal-room__button.-confirm:hover{
+  background-color: #d40606;
+  box-shadow: 0 0 10px 5px #ff00005b;
+}
+
+.modal-room__block.-confirm{
+  height: 250px;
+}
+
+.modal-room__button.-confirm.-green{
+  background-color: #04ff00;
+  border: 1px solid #03af00;
+  margin-right: 40px;
+}
+.modal-room__button.-confirm.-green:hover{
+  background-color: #0ad406;
+  box-shadow: 0 0 10px 5px #04ff005b;
+}
+@media all and (max-width: 425px) {
+  .modal-room__button.-confirm{
+    height: 40px;
+  }
+  .modal-room__button.-confirm.-green{
+    margin-right: 10px;
+  }
+  .modal-room__block.-confirm{
+    height: 180px;
+  }
+}
+
+.modal-room__container.-confirm{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

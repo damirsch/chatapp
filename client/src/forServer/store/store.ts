@@ -1,5 +1,7 @@
 import { IUser } from "../models/IUser";
 import AuthService from "../services/AuthService";
+import RoomService from "../services/RoomService";
+import UserService from "../services/UserService";
 import axios from 'axios'
 import { AuthResponse } from "../models/response/AuthResponse";
 import { API_URL } from "../http";
@@ -62,6 +64,46 @@ export default class Store{
       localStorage.setItem('token', response.data.accessToken)
       this.setAuth(true)
       this.setUser(response.data.user)
+    }catch(e: any){
+      throw new Error(e.response?.data?.message)
+    }
+  }
+
+  async getUsers(){
+    try{
+      return await UserService.fetchUsers()
+    }catch(e: any){
+      throw new Error(e.response?.data?.message)
+    }
+  }
+
+  async getRooms(){
+    try{
+      return await RoomService.fetchRooms()
+    }catch(e: any){
+      throw new Error(e.response?.data?.message)
+    }
+  }
+
+  async getMessages(roomId: string){
+    try{
+      return await RoomService.fetchMessages(roomId)
+    }catch(e: any){
+      throw new Error(e.response?.data?.message)
+    }
+  }
+
+  async getAmountOfSentMessages(){
+    try{
+      return await UserService.fetchAmountOfSentMessages(this.user.id)
+    }catch(e: any){
+      throw new Error(e.response?.data?.message)
+    }
+  }
+
+  async deleteRoom(roomId: string){
+    try{
+      return await RoomService.deleteRoom(roomId, this.user.id)
     }catch(e: any){
       throw new Error(e.response?.data?.message)
     }

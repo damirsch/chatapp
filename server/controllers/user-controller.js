@@ -59,6 +59,16 @@ class UserController{
       next(e)
     }
   }
+
+  async getAmountOfSentMessages(req, res, next){
+    try{
+      const {userId} = req.body
+      const amountOfSentMessages = await userService.getAmountOfSentMessages(userId)
+      return res.json(amountOfSentMessages)
+    }catch(e){
+      next(e)
+    }
+  }
 }
 
 module.exports = new UserController()

@@ -1,0 +1,95 @@
+.attraction{
+  background-image: url('./bg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-size: 22px;
+  height: 100vh;
+}
+
+.attraction__description{
+  position: relative;
+  margin: auto;
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  max-width: 670px;
+  animation: showing-from-the-top 1s ease;
+}
+.attraction__description div{
+  font-family: monospace;
+}
+@keyframes showing-from-the-top{
+  from{
+    top: -300px;
+    opacity: 0;
+  }
+  to{
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.typing{
+  width: 400px;
+  margin-bottom: 20px;
+  color: white;
+  font-family: monospace;
+  font-size: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid white;
+  animation: cursor 0.75s step-end infinite, printed_text 1s steps(29);
+}
+@keyframes cursor {
+  0% {
+    border-color: white;
+  }
+  50% {
+    border-color: transparent;
+  }
+  100% {
+    border-color: white;
+  }
+}
+@keyframes printed_text {
+  from {
+    width: 0;
+  }
+}
+
+.attraction__buttons{
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.attraction__buttons .attraction__button{
+  width: 100%;
+  position: relative;
+  height: 65px;
+  border-radius: 20px;
+  margin-top: 10px;
+  font-size: 20px;
+  border: none;
+  transition: all 0.2s;
+  font-family: monospace;
+}
+.attraction__buttons .attraction__button:hover{
+  background-color: #c0c0c0;
+}
+.attraction__buttons .attraction__button:active{
+  background-color: #9f9f9f;
+}
+
+@media all and (max-width: 425px){
+  .attraction{
+    font-size: 18px;
+  }
+  .typing{
+    width: 17rem;
+    font-size: 20px;
+  }
+}

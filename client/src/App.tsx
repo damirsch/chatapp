@@ -13,7 +13,6 @@ import Preloader from './ui/preloader/Preloader';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true)
-
   const {store} = useContext(Context)
 
   useEffect(() => {
@@ -29,6 +28,9 @@ function App() {
     return (
       <Router>
         <Routes>
+          <Route path="*" element={<MainPage/>}/>
+          <Route path="/statistics" element={<MainPage/>}/>
+          <Route path="/chat" element={<MainPage/>}/>
           <Route path="/" element={<MainPage/>}/>
           <Route path="/registration" element={<RegistrationPage/>}/>
           <Route path="/signin" element={<SigninPage/>}/>

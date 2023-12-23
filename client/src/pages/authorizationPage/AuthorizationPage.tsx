@@ -2,7 +2,7 @@ import React, { type FC, useContext, useState, useEffect } from 'react'
 import { AuthorizationForm } from '../../modules'
 import './AuthorizationPage.css'
 import { Context } from '../..'
-import Modal from '../../components/modal/Modal'
+import Modal from '../../components/modals/Modal'
 import { useNavigate } from 'react-router-dom'
 import Preloader from '../../ui/preloader/Preloader'
 import { IAuthorizationPage } from '../../types'
@@ -21,7 +21,7 @@ const AuthorizationPage: FC<IAuthorizationPage> = ({ isForRegistration }) => {
     }else if(isAuth){
       setTimeout(() => {
         navigate('/')
-      }, 2000)
+      }, 1500)
     }
   }, [isAuth])
 
@@ -46,8 +46,8 @@ const AuthorizationPage: FC<IAuthorizationPage> = ({ isForRegistration }) => {
             <div>
               look at my github ↓
             </div>
-            <a className='link' href='https://github.com/pudgepicker'>
-              https://github.com/pudgepicker
+            <a className='link' href='https://github.com/damirsch08' target='_blank' rel='noreferrer'>
+              https://github.com/damirsch08
             </a>
           </div>
         </div>

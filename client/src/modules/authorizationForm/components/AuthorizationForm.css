@@ -2,6 +2,7 @@
   width: 69.75%;
   padding: 0 60px;
   position: relative;
+  background-color: var(--primary-color);
 }
 
 .authorization-form__wrapper{
