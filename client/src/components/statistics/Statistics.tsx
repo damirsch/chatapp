@@ -10,6 +10,7 @@ Chart.register(CategoryScale)
 
 interface IStatistics{
 	store: Store
+	activeTab: string[]
 }
 const Statistics: FC<IStatistics> = ({ store }) => {
 	const [amountOfSentMessages, setAmountOfSentMessages] = useState<IAmountOfSentMessages[]>([])
@@ -28,7 +29,7 @@ const Statistics: FC<IStatistics> = ({ store }) => {
 				return parseInt(a.time.replace(/[^\d]/g, '')) - parseInt(b.time.replace(/[^\d]/g, ''))
 			})
 			setChartData({
-				labels: res.data.map((data) => data.time), 
+				labels: res.data.sort((a, b) => +new Date(a.time)-+new Date(b.time)).map(data => data.time), 
 				datasets: [
 					{
 						label: "Number of messages sent",
@@ -52,11 +53,11 @@ const Statistics: FC<IStatistics> = ({ store }) => {
 			}
 			{amountOfSentMessages ?
 				<div style={{display: 'flex', width: '400px'}}>
-						{amountOfSentMessages.map(i => {
+						{/* {amountOfSentMessages.map(i => {
 							return(
 								<div key={i.time}>{i.time}: {i.amount}</div>
 							)
-						})}
+						})} */}
 				</div>
 				: null
 			}

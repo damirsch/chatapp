@@ -48,6 +48,7 @@ const AuthorizationForm: FC<IAuthorizationForm> = ({isForRegistration, setIsAuth
 		try{
 			setLoading(true)
 			await store.registration(username, email, password)
+			setIsAuth(true)
 		}catch(e: any){
 			if(e instanceof Error){
 				setServerError(e.message)

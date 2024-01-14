@@ -29,9 +29,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="*" element={<MainPage/>}/>
-          <Route path="/statistics" element={<MainPage/>}/>
-          <Route path="/chat" element={<MainPage/>}/>
           <Route path="/" element={<MainPage/>}/>
+          <Route path="/statistics" element={<MainPage/>}/>
+          <Route path="/chat/:roomId" element={<MainPage/>}/>
           <Route path="/registration" element={<RegistrationPage/>}/>
           <Route path="/signin" element={<SigninPage/>}/>
           <Route path="/preloader" element={<Preloader/>}/>

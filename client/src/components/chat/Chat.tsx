@@ -1,9 +1,9 @@
 import React, { useEffect, useState, type FC } from 'react'
 import './Chat.css'
 import io from 'socket.io-client'
-import { IUser } from '../../forServer/models/IUser'
+import { IUser } from '../../types'
 import { IMessage, IRoom, IMessageContextMenuPos } from '../../types'
-import Spinner from '../spinner/Spinner'
+import Spinner from '../spinners/Spinner'
 import ConfirmModal from '../modals/ConfirmModal'
 import MessageContextMenu from '../contextMenu/MessageContextMenu'
 import SendMessageInput from '../inputs/SendMessageInput'
@@ -13,9 +13,10 @@ const socket = io('http://localhost:5000')
 
 interface IChat{
 	store: Store
+	activeTab: string[]
 }
 
-const Chat: FC<IChat> = ({ store }) => {
+const Chat: FC<IChat> = ({ store, activeTab }) => {
 	const [receivedMessages, setReceivedMessages] = useState<IMessage[]>([])
 	const [receivedRooms, setReceivedRooms] = useState<IRoom[]>([])
 	const [isJoined, setIsJoined] = useState(false)
@@ -30,6 +31,7 @@ const Chat: FC<IChat> = ({ store }) => {
 	const [openMessageContextMenu, setOpenMessageContextMenu] = useState(false)
 	const [openSettings, setOpenSettings] = useState(false)
 	const [loadingRooms, setLoadingRooms] = useState(false)
+	const [errorCreatingRoom, setErrorCreatingRoom] = useState('')
 	const [messageContextMenuData, setMessageContextMenuData] = useState<IMessage>()
 	const [messageContextMenuPos, setMessageContextMenuPos] = useState<IMessageContextMenuPos>(
 		{ posX: 0, posY: 0 }
@@ -52,7 +54,7 @@ const Chat: FC<IChat> = ({ store }) => {
 	}
 
 	function deleteMessage(id: string){
-		try {
+		try{
 			socket.emit('delete_message', {userId: store.user.id, _id: id})
 			setOpenMessageContextMenu(false)
 		}catch(e){}
@@ -113,8 +115,12 @@ const Chat: FC<IChat> = ({ store }) => {
 			setReceivedMessages(prev => [...prev, message])
 		})
 		socket.on('joined_room', (room: IRoom) => {
+			if(!room){
+				setLoadingRooms(true)
+				return
+			}
 			setIsJoined(true)
-			getMessages(room.roomId)
+			getMessages(room?.roomId)
 			setCurrentRoom(room)
 			setLoadingRooms(true)
 		})
@@ -130,12 +136,18 @@ const Chat: FC<IChat> = ({ store }) => {
 		socket.on('deleted_message', (message: IMessage) => {
 			setReceivedMessages(prev => prev.filter(i => i._id !== message._id))
 		})
-		socket.on('error', (data) => {
-			if(data === 'much rooms'){
+		socket.on('error', (data: string) => {
+			if(data.includes('much rooms')){
 				setLoadingRooms(true)
 				setOpenCreateModal(false)
+				setErrorCreatingRoom(data)
 			}
-			console.log(data);
+			if(data.includes('room with the same name')){
+				setOpenCreateModal(false)
+				setLoadingRooms(true)
+				setErrorCreatingRoom(data)
+			}
+			console.log(data)
 		})
 	}, [socket])
 	
@@ -144,6 +156,11 @@ const Chat: FC<IChat> = ({ store }) => {
 		getUsers()
 	}, [])
 
+	useEffect(() => {
+		const roomId = activeTab[1]
+		if(!currentRoom && roomId) join(roomId) 
+	}, [])
+	
 	return (
 		<div className='chat' onClick={() => closeAllMenues()}>
 			<CreateRoomModal 
@@ -152,6 +169,7 @@ const Chat: FC<IChat> = ({ store }) => {
 				setName={setName} 
 				setPassword={setPassword} 
 				sendRoom={sendRoom}
+				store={store}
 			/>
 			<ConfirmModal open={openDeleteModal} setOpen={setOpenDeleteModal} actionConfirm={deleteRoom} text='Delete room'/>
 			<MessageContextMenu 
@@ -233,7 +251,7 @@ const Chat: FC<IChat> = ({ store }) => {
 									</div>
 								</div>
 								<div 
-									className="middle-section__correspondence"
+									className="middle-section__correspondence -scroll"
 									style={!receivedMessages ? {alignItems: 'center', justifyContent: 'center'} : {}}
 								>
 									{/* ! Delete Math.random() !*/}

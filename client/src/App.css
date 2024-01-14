@@ -84,3 +84,25 @@ body{
 .link{
   text-decoration: underline;
 }
+
+.-scroll::-webkit-scrollbar{
+  width: 7px;
+  background-color: var(--primary-color);
+}
+.-scroll::-webkit-scrollbar-thumb{
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+}
+
+.-id{
+  font-weight: 100;
+  color: #c2c2c2;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.-link{
+  color: #54549b;
+}
+.-link:hover{
+  color: #404075;
+}

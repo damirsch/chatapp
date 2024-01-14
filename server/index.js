@@ -6,7 +6,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const router = require('./router/index')
 const mongoose = require('mongoose')
-const middleware = require('./middlewares/error-middlewate')
+const middleware = require('./middlewares/error-middleware')
 const roomModel = require('./models/room-model')
 const messageModel = require('./models/message-model')
 const http = require('http').createServer(app)
@@ -28,7 +28,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
 	credentials: true,
-	origin: process.env.CLIENT_URL
+	origin: CLIENT_URL
 }))
 app.use('/api', router)
 app.use(middleware)
@@ -47,7 +47,6 @@ const start = async () => {
 
 		// sockets
 		io.on('connection', (socket) => {
-
 			let currentRoom = null
 			socket.on('join', async (data) => {
 				const roomId = data.roomId
@@ -73,21 +72,40 @@ const start = async () => {
 				const id = uuidv4()
 				const user = await userModel.findById(data.userId)
 				const amounOfRooms = user.amount_of_rooms
-				if(amounOfRooms >= 1 || user.access_to_create_much_rooms){
-					socket.emit('error', 'much rooms: ' + amounOfRooms)
+				async function createRoom(){
+					newAmount = amounOfRooms + 1
+					try{
+						const candidateRoom = await roomModel.findOne({name: data.name})
+						if(candidateRoom){
+							socket.emit('error', 'there is room with the same name')
+							return
+						}
+						const room = await roomModel.create(
+							{
+								roomId: id, 
+								name: data.name, 
+								creatorId: data.userId, 
+								password: data.password || null
+							}
+						)
+						await userModel.findByIdAndUpdate(
+							data.userId,
+							{$set: {"amount_of_rooms": newAmount}, $addToSet: {userRooms: room}}
+						)
+						io.sockets.emit('receive_room', room)
+					}finally{
+						release()
+					}
+				}
+				if(amounOfRooms < 1 && !user.access_to_create_much_rooms){
+					createRoom()
+					return
+				}else if(user.access_to_create_much_rooms){
+					createRoom()
 					return
 				}
-				newAmount = amounOfRooms + 1
-				try{
-					const room = await roomModel.create({roomId: id, name: data.name, creatorId: data.userId})
-					await userModel.findByIdAndUpdate(
-						data.userId,
-						{$set: {"amount_of_rooms": newAmount}, $addToSet: {userRooms: room}}
-					)
-					io.sockets.emit('receive_room', room)
-				}finally{
-					release()
-				}
+				socket.emit('error', 'much rooms: ' + amounOfRooms)
+				return
 			})
 			
 			socket.on('delete_room', async (data) => {

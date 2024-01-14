@@ -13,7 +13,10 @@ const ConfirmModal: FC<IConfirmModal> = ({ open, setOpen, actionConfirm, text}) 
             <button className="modal-room__button -confirm -green" onClick={() => {actionConfirm(); setOpen(false)}}>
               Done
             </button>
-            <button className="modal-room__button -confirm -red" onClick={() => setOpen(false)}>
+            <button 
+              className="modal-room__button -confirm -red" 
+              onClick={() => setOpen(false)}
+            >
               Cancel
             </button>
           </div>

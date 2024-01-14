@@ -13,10 +13,17 @@ router.post('/registration',
 )
 router.post('/login', userController.login)
 router.post('/logout', userController.logout)
+router.delete('/delete-account', userController.deleteAccount)
 router.get('/users', userController.getUsers)
 router.get('/refresh', userController.refresh)
 router.get('/rooms', roomController.getRooms)
 router.post('/messages', roomController.getMessages)
-router.post('/amountOfSentMessages', userController.getAmountOfSentMessages)
+router.post('/amount-of-sent-messages', userController.getAmountOfSentMessages)
+router.post('/change-username',
+  body('username').isLength({min: 4, max: 20}),
+  userController.changeUsername)
+router.post('/change-email',
+  body('email').isEmail(),
+  userController.changeEmail)
 
 module.exports = router

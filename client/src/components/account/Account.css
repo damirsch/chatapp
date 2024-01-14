@@ -1,0 +1,231 @@
+.account-left{
+	padding: 15px;
+	width: 60%;
+	border-right: 1px solid var(--border-color);
+	height: 100%;
+	overflow-y: auto;
+	animation: showModal 0.3s ease backwards;
+}
+
+.account-main{
+	position: relative;
+	height: 300px;
+	overflow: hidden;
+	animation: increaseBlock 0.5s ease forwards;
+	border-radius: 20px;
+	border: 2px solid var(--border-color);
+}
+.account-main.-active{
+	animation: decreaseBlock 0.5s ease forwards;
+}
+@keyframes decreaseBlock{
+	to{
+		height: 110px;
+	}
+}
+@keyframes increaseBlock{
+	from{
+		height: 110px;
+	}
+	to{
+		height: 300px;
+	}
+}
+
+.account-main__bg{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-image: url('../img/default_avatar.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	filter: blur(20px);
+	z-index: -1;
+}
+
+.account-main__block{
+	position: absolute;
+	display: flex;
+	min-height: 100px;
+	bottom: 0;
+	padding: 30px 15px;
+	background-color: var(--primary-color);
+	width: 100%;
+}
+
+.account-main__avatar{
+	position: relative;
+	width: 150px;
+	margin: 0 20px;
+	animation: increseAvatar 0.5s ease forwards;
+}
+.account-main__avatar.-active{
+	animation: decreaseAvatar 0.5s ease forwards;
+}
+
+.account-main__img{
+	position: absolute;
+	bottom: 0;
+	width: 150px;
+	height: 150px;
+	background-image: url('../img/default_avatar.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 50%;
+	border: 5px solid var(--primary-color);
+	animation: increseAvatar 0.5s ease forwards;
+}
+.account-main__img.-active{
+	animation: decreaseAvatar 0.5s ease forwards;
+}
+
+@keyframes decreaseAvatar{
+	to{
+		width: 50px;
+		height: 50px;
+	}
+}
+@keyframes increseAvatar{
+	from{
+		width: 50px;
+		height: 50px;
+	}
+	to{
+		width: 150px;
+	}
+}
+
+.account-main__text-loading{
+	display: inline-flex;
+	align-items: center;
+}
+.account-main__text-loading span{
+	margin-right: 10px;
+}
+
+.account-main__actions{
+	margin: 0 30px 0 auto;
+}
+.account-main__actions button{
+	font-size: 20px;
+	padding: 10px 15px;
+	background-color: #ffffff;
+	border-radius: 10px;
+	color: #000000;
+	font-weight: 500;
+	transition: all 0.2s ease;
+}
+.account-main__actions button:hover{
+	background-color: #cecece;
+	box-shadow: 0 0 10px 5px #ffffff2c;
+}
+
+.account-right{
+	padding: 15px;
+	font-size: 25px;
+}
+
+.account-right__block{
+	margin-top: 10px;
+	padding: 10px;
+	border: 2px solid var(--border-color);
+	border-radius: 10px;
+	font-size: 15px;
+}
+
+
+.account-edit{
+	height: 150px;
+	padding: 30px 15px;
+	margin-top: 20px;
+	border-radius: 20px;
+	border: 2px solid var(--border-color);
+	animation: decreaseEdit 0.5s ease forwards;
+	overflow: hidden;
+}
+.account-edit.-active{
+	animation: increaseEdit 0.5s ease forwards;
+}
+
+@keyframes decreaseEdit{
+	from{
+		height: 35%;
+	}
+	to{
+		opacity: 0;
+		height: 0;
+	}
+}
+@keyframes increaseEdit{
+	from{
+		opacity: 0;
+		height: 0;
+	}
+	99%{
+		height: 40%;
+	}
+	to{
+		height: auto;
+	}
+}
+
+.account-edit__wrapper{
+	height: 100%;
+	overflow: hidden;
+}
+
+.account-edit__block{
+	display: flex;
+	align-items: center;
+}
+
+.account-edit__input{
+	width: 50%;
+	padding: 10px 5px 10px 20px;
+	border: 1px solid var(--border-color);
+	background-color: inherit;
+	color: white;
+	border-radius: 10px;
+	font-size: 17px;
+	margin-bottom: 20px;
+}
+
+.account-edit__button{
+	margin: 5px 10px 10px 0;
+	font-size: 18px;
+	padding: 5px 15px;
+	background-color: #ffffff;
+	border-radius: 10px;
+	color: #000000;
+	font-weight: 500;
+	transition: all 0.2s ease;
+}
+.account-edit__button:hover{
+	background-color: #cecece;
+	box-shadow: 0 0 10px 5px #ffffff2c;
+}
+
+.account-edit__button.-red{
+	background-color: #FF0000;
+}
+.account-edit__button.-red:hover{
+	background-color: #D40606;
+	box-shadow: 0 0 10px 5px #d406064a;
+}
+
+.account-edit__button.-gray{
+	background-color: #777777;
+	margin-left: 0;
+}
+.account-edit__button.-gray:hover{
+	background-color: #6a6a6a;
+	box-shadow: 0 0 10px 5px #6a6a6a50;
+}
+
+.account-edit__button.-green{
+	background-color: #00ff08;
+}
+.account-edit__button.-green:hover{
+	background-color: #00c207;
+	box-shadow: 0 0 10px 5px #00c20648;
+}

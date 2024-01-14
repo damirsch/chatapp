@@ -1,272 +1,264 @@
 .chat{
-  background-color: var(--primary-color);
-  height: 100%;
-  width: 100%;
-  animation: showModal 0.3s ease backwards;
+	background-color: var(--primary-color);
+	height: 100%;
+	width: 100%;
+	animation: showModal 0.3s ease backwards;
 }
 
 .chat__container{
-  display: flex;
-  display: block;
-  width: 100%;
-  height: 100%;
+	display: flex;
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
 .chat__sections{
-  display: flex;
-  width: 100%;
-  height: 85%;
-  overflow: hidden;
+	display: flex;
+	width: 100%;
+	height: 85%;
+	overflow: hidden;
 }
 
 .chat__section{
-  height: 100%;
+	height: 100%;
 }
 .chat__section:not(:last-child){
-  border-right: 1px solid var(--border-color);
+	border-right: 1px solid var(--border-color);
 }
 
 .left-section{
-  width: 25%;
-  padding: 25px;
+	width: 25%;
+	padding: 25px;
 }
 .middle-section{
-  width: 50%;
+	width: 50%;
 }
 .right-section{
-  width: 25%;
+	width: 25%;
 }
 
 
 .left-section__nav{
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .left-section__nav .left-section__title{
-  font-size: 16px;
-  letter-spacing: 0.001px;
+	font-size: 16px;
+	letter-spacing: 0.001px;
 }
 
 .left-section__nav .left-section__search{
-  width: 20px;
-  height: 20px;
-  background-image: url('../img/search.png');
-  background-size: cover;
-  margin-left: auto;
-  filter: invert(100%);
-  cursor: pointer;
+	width: 20px;
+	height: 20px;
+	background-image: url('../img/search.png');
+	background-size: cover;
+	margin-left: auto;
+	filter: invert(100%);
+	cursor: pointer;
 }
 
 .left-section__nav .left-section__add{
-  cursor: pointer;
-  font-size: 30px;
-  color: var(--secondary-color);
-  margin-left: 10px;
-  user-select: none;
+	cursor: pointer;
+	font-size: 30px;
+	color: var(--secondary-color);
+	margin-left: 10px;
+	user-select: none;
 }
 
 .left-section__groups{
-  margin-top: 30px;
-  max-height: 80%;
-  overflow-y: auto;
+	margin-top: 30px;
+	max-height: 80%;
+	overflow-y: auto;
 }
 
 .left-section__group{
-  font-size: 15px;
-  display: flex;
-  cursor: pointer;
-  width: 100%;
-  border-radius: 10px;
-  padding: 15px;
-  transition: background 1s ease;
+	font-size: 15px;
+	display: flex;
+	cursor: pointer;
+	width: 100%;
+	border-radius: 10px;
+	padding: 15px;
+	transition: background 1s ease;
 }
 .left-section__group:hover{
-  background: linear-gradient(90deg, #1a1a1a 0%, #0c0c0c 100%);
+	background: linear-gradient(90deg, #1a1a1a 0%, #0c0c0c 100%);
 }
 .left-section__group:not(:last-child){
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 .left-section__group-fill{
-  display: flex;
-  height: 70px;
-  margin-bottom: 20px;
-  width: 100%;
-  border-radius: 10px;
-  padding: 15px;
-  background: var(--border-color);
-  overflow: hidden;
+	display: flex;
+	height: 70px;
+	margin-bottom: 20px;
+	width: 100%;
+	border-radius: 10px;
+	padding: 15px;
+	background: var(--border-color);
+	overflow: hidden;
 }
 
 .left-section__group.-active{
-  background: linear-gradient(90deg, #1a1a1a 0%, #0c0c0c 100%);
-  cursor: auto;
+	background: linear-gradient(90deg, #1a1a1a 0%, #0c0c0c 100%);
+	cursor: auto;
 }
 
 .left-section__message{
-  display: flex;
-  color: #545355;
+	display: flex;
+	color: #545355;
 }
 
 .left-section__time{
-  color: #6e6c70;
-  font-weight: 500;
+	color: #6e6c70;
+	font-weight: 500;
 }
 
 .left-section__time{
-  margin-left: auto;
+	margin-left: auto;
 }
 
 .left-section__avatar{
-  width: 45px;
-  height: 45px;
-  background-color: var(--secondary-color);
-  box-shadow: inset 0 0 20px var(--primary-color);
-  border-radius: 10px;
+	width: 45px;
+	height: 45px;
+	background-color: var(--secondary-color);
+	box-shadow: inset 0 0 20px var(--primary-color);
+	border-radius: 10px;
 }
 
 
 .middle-section{
-  padding: 25px;
+	padding: 25px;
 }
 .middle-section > div{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 }
 
 .middle-section__nav{
-  display: flex;
+	display: flex;
 }
 
 .middle-section__settings-button{
-  position: relative;
-  width: 50px;
-  height: 50px;
-  margin-left: auto;
+	position: relative;
+	width: 50px;
+	height: 50px;
+	margin-left: auto;
 }
 
 .middle-section__bg{
-  border-radius: 50%;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  background-image: url('../img/ellipsis.png');
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: all 0.1s ease;
+	border-radius: 50%;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	background-image: url('../img/ellipsis.png');
+	background-size: 50%;
+	background-repeat: no-repeat;
+	background-position: center;
+	transition: all 0.1s ease;
 }
 .middle-section__bg:hover{
-  background-color: var(--border-color);
+	background-color: var(--border-color);
 }
 .middle-section__bg:active{
-  background-color: #191919;
+	background-color: #191919;
 }
 
 .middle-section__settings{
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 300px;
-  border-radius: 10px;
-  border: 2px solid var(--border-color);
-  overflow: hidden;
-  animation: showMenu 0.2s ease backwards;
-  z-index: 5;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 300px;
+	border-radius: 10px;
+	border: 2px solid var(--border-color);
+	overflow: hidden;
+	animation: showMenu 0.2s ease backwards;
+	z-index: 5;
 }
 .middle-section__settings.-hide{
-  display: none;
+	display: none;
 }
 
 .middle-section__settings-item{
-  display: flex;
-  cursor: pointer;
-  width: 100%;
-  height: 40px;
-  padding: 10px 15px;
-  background-color: var(--primary-color);
+	display: flex;
+	cursor: pointer;
+	width: 100%;
+	height: 40px;
+	padding: 10px 15px;
+	background-color: var(--primary-color);
 }
 .middle-section__settings-item:not(:last-of-type){
-  border-bottom: 2px solid var(--border-color);
+	border-bottom: 2px solid var(--border-color);
 }
 
 .middle-section__img{
-  margin: auto 5px auto 0;
-  width: 20px;
-  height: 20px;
-  background-repeat: no-repeat;
-  background-size: contain;
+	margin: auto 5px auto 0;
+	width: 20px;
+	height: 20px;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 .middle-section__img.delete{
-  background-image: url('../img/delete.png');
+	background-image: url('../img/delete.png');
 }
 
 .middle-section__settings-item:hover{
-  background-color: var(--border-color);
+	background-color: var(--border-color);
 }
  
 .middle-section__name{
-  font-size: 32px;
+	font-size: 32px;
 }
 
 .middle-section__correspondence{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-top: 25px;
-  height: 100%;
-  overflow-y: auto;
-  padding-right: 10px;
-  margin-right: -10px;
-}
-.middle-section__correspondence::-webkit-scrollbar{
-  width: 7px;
-  background-color: var(--primary-color);
-}
-.middle-section__correspondence::-webkit-scrollbar-thumb{
-  background-color: var(--secondary-color);
-  border-radius: 20px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	margin-top: 25px;
+	height: 100%;
+	overflow-y: auto;
+	padding-right: 10px;
+	margin-right: -10px;
 }
 
 .middle-section__message{
-  width: fit-content;
-  background-color: var(--border-color);
-  font-weight: 300;
-  padding: 10px 20px;
-  border-radius: 20px;
-  margin-bottom: 5px;
-  font-weight: 400;
+	width: fit-content;
+	background-color: var(--border-color);
+	font-weight: 300;
+	padding: 10px 20px;
+	border-radius: 20px;
+	margin-bottom: 5px;
+	font-weight: 400;
 }
 .middle-section__message.my-message{
-  background-color: var(--secondary-color);
-  color: #000;
-  margin-left: auto;
+	background-color: var(--secondary-color);
+	color: #000;
+	margin-left: auto;
 }
 
 .middle-section__footer{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .middle-section__footer input{
-  padding: 10px 5px 10px 20px;
-  width: 100%;
-  border: 2px solid var(--border-color);
-  background-color: inherit;
-  color: white;
-  border-radius: 10px;
-  font-size: 16px;
+	padding: 10px 5px 10px 20px;
+	width: 100%;
+	border: 2px solid var(--border-color);
+	background-color: inherit;
+	color: white;
+	border-radius: 10px;
+	font-size: 16px;
 }
 
 .middle-section__send-button{
-  background-image: url('../img/send.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  margin-left: 25px;
-  width: 25px;
-  height: 25px;
+	background-image: url('../img/send.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	margin-left: 25px;
+	width: 25px;
+	height: 25px;
 }
