@@ -12,7 +12,7 @@ class UserController{
 			}
 			const {username, email, password} = req.body
 			const userData = await userService.registration(username, email, password)
-			res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 1000, path: '/', httpOnly: true})
+			res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 1000, path: '/', domain: 'https://main--chatapp-client222.netlify.app', httpOnly: true})
 			return res.json(userData)
 		}catch(e){
 			next(e)
@@ -23,7 +23,7 @@ class UserController{
 		try{
 			const {username, password} = req.body
 			const userData = await userService.login(username, password)
-			res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 1000, path: '/', httpOnly: true})
+			res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 1000, path: '/', domain: 'https://main--chatapp-client222.netlify.app', httpOnly: true})
 			return res.json(userData)
 		}catch(e){
 			next(e)
