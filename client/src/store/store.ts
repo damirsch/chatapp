@@ -1,10 +1,11 @@
-import { IUser } from "../../types";
-import AuthService from "../services/AuthService";
-import RoomService from "../services/RoomService";
-import UserService from "../services/UserService";
+import { IUser } from "../types";
+import AuthService from "./services/AuthService";
+import RoomService from "./services/RoomService";
+import UserService, { userAPI } from "./services/UserService";
 import axios from 'axios'
-import { AuthResponse } from "../models/response/AuthResponse";
-import { API_URL } from "../http";
+import { AuthResponse } from "./models/AuthResponse";
+import { API_URL } from "./http";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 export default class Store{
 	constructor(){
@@ -139,3 +140,20 @@ export default class Store{
 		}
 	}
 }
+
+
+const rootReducer = combineReducers({
+	[userAPI.reducerPath]: userAPI.reducer
+})
+
+export const setupStore = () => {
+	return configureStore({
+		reducer: rootReducer,
+		middleware: (getDefaultMiddleware) => 
+			getDefaultMiddleware().concat(userAPI.middleware)
+	}
+)}
+
+export type RootState = ReturnType<typeof rootReducer>
+export type AppStore = ReturnType<typeof setupStore>
+export type AppDispatch = AppStore['dispatch']

@@ -1,6 +1,6 @@
 import { Dispatch } from "react"
 import { Socket } from "socket.io-client"
-import Store from "./forServer/store/store"
+import Store from "./store/store"
 
 export interface IAuthorizationPage {
 	isForRegistration: boolean

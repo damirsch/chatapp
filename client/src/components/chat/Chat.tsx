@@ -8,7 +8,7 @@ import ConfirmModal from '../modals/ConfirmModal'
 import MessageContextMenu from '../contextMenu/MessageContextMenu'
 import SendMessageInput from '../inputs/SendMessageInput'
 import CreateRoomModal from '../modals/CreateRoomModal'
-import Store from '../../forServer/store/store'
+import Store from '../../store/store'
 const socket = io('http://localhost:5000')
 
 interface IChat{

@@ -3,9 +3,10 @@ import './Statistics.css'
 import { Chart } from 'chart.js/auto'
 import { Line } from 'react-chartjs-2'
 import { CategoryScale } from 'chart.js'
-import Store from '../../forServer/store/store'
+import Store from '../../store/store'
 import { IAmountOfSentMessages } from '../../types'
 import options from './options'
+import { useFetchAmountOfSentMessagesMutation, userAPI } from '../../store/services/UserService'
 Chart.register(CategoryScale)
 
 interface IStatistics{
@@ -15,10 +16,20 @@ interface IStatistics{
 const Statistics: FC<IStatistics> = ({ store }) => {
 	const [amountOfSentMessages, setAmountOfSentMessages] = useState<IAmountOfSentMessages[]>([])
 	const [chartData, setChartData] = useState<any>()
+	console.log(store.user.id);
+	
+	const [data, { isLoading, error }] = useFetchAmountOfSentMessagesMutation();
+	const handleSubmit = async () => {
+		try{
+			const res = await data(store.user.id)
+			console.log(res);
+		}catch(err){}
+	}
 	
 	useEffect(() => {
 		(async () => {
 			const res = await store.getAmountOfSentMessages()
+			
 			res.data.map(i => {
 				const date = new Date(i.time)
 				i.time = date.toLocaleString('en', {month: 'short'}) + ' ' 
@@ -51,7 +62,7 @@ const Statistics: FC<IStatistics> = ({ store }) => {
 				</div> 
 				: null
 			}
-			{amountOfSentMessages ?
+			{amountOfSentMessages &&
 				<div style={{display: 'flex', width: '400px'}}>
 						{/* {amountOfSentMessages.map(i => {
 							return(
@@ -59,8 +70,8 @@ const Statistics: FC<IStatistics> = ({ store }) => {
 							)
 						})} */}
 				</div>
-				: null
 			}
+			<button onClick={() => handleSubmit()}>Console log</button>
 		</div>
 	)
 }

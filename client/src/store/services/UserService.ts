@@ -1,6 +1,7 @@
-import $api from "../http";
+import $api, { API_URL } from "../http";
 import {AxiosResponse} from 'axios'
 import { IAmountOfSentMessages, IUserWithtokens, IUser } from "../../types";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export default class UserService{
 	static fetchUsers(): Promise<AxiosResponse<IUser[]>>{
@@ -23,3 +24,30 @@ export default class UserService{
 		return $api.delete<string>('/delete-account', {params: {userId}})
 	}
 }
+
+export const userAPI = createApi({
+	reducerPath: 'userAPI',
+	baseQuery: fetchBaseQuery({
+		baseUrl: API_URL, 
+		prepareHeaders: (headers) => {
+			headers.set('authorization', `Bearer ${localStorage.getItem('token')}`)
+			return headers
+		}
+	}),
+	endpoints: (build) => ({
+		fetchUsers: build.query<IUser[], number>({
+			query: () => ({
+				url: '/users',
+			})
+		}),
+		fetchAmountOfSentMessages: build.mutation<IAmountOfSentMessages[], string>({
+			query: (userId: string) => ({
+				url: '/amount-of-sent-messages',
+				method: 'POST',
+				body: {userId}
+			})
+		})
+	})
+})
+
+export const { useFetchAmountOfSentMessagesMutation } = userAPI

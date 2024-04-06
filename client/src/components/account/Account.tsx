@@ -1,5 +1,5 @@
 import React, { useState, type FC } from 'react'
-import Store from '../../forServer/store/store'
+import Store from '../../store/store'
 import './Account.css'
 import Loader from '../spinners/Loader'
 import ConfirmModal from '../modals/ConfirmModal'
