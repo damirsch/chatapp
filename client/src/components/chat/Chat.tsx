@@ -9,7 +9,7 @@ import MessageContextMenu from '../contextMenu/MessageContextMenu'
 import SendMessageInput from '../inputs/SendMessageInput'
 import CreateRoomModal from '../modals/CreateRoomModal'
 import Store from '../../store/store'
-const socket = io('http://localhost:5000')
+const socket = io('https://chatapp-server-3h51.onrender.com')
 
 interface IChat{
 	store: Store
