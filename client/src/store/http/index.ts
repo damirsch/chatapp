@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = 'https://chatapp-pearl-eta.vercel.app/api'
+export const API_URL = 'https://chatapp-server-3h51.onrender.com/api'
 
 const $api = axios.create({
   withCredentials: true,
