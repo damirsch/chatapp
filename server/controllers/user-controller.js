@@ -24,6 +24,7 @@ class UserController{
 			const {username, password} = req.body
 			const userData = await userService.login(username, password)
 			res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 1000, path: '/api/', httpOnly: true})
+			console.log(userData.refreshToken);
 			return res.json(userData)
 		}catch(e){
 			next(e)
